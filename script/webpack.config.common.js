@@ -16,7 +16,18 @@ module.exports = {
             type: "umd"
         }
     },
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx|ts|tsx)$/,
+                exclude: /node_modules/,
+                use: 'babel-loader?cacheDirectory',
+            }
+        ]
+    },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, '..', 'index.html')
+        })
     ]
 }
