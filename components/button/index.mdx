@@ -6,7 +6,9 @@ menu: 组件
 
 import { Playground } from 'docz';
 import Button from './button';
-import Basic from './demo/basic'
+import { HappyBox } from '../../doc-comps';
+import BasicDemoCode from '!raw-loader!./demo/basic.tsx';
+import BasicDemo from './demo/basic';
 
 # Alert 警告提示
 
@@ -16,9 +18,9 @@ import Basic from './demo/basic'
 
 ### 基本用法
 
-<Playground>
-  <Basic />
-</Playground>
+<HappyBox code={BasicDemoCode} title="基本用法" desc="点击按钮">
+    <BasicDemo />
+</HappyBox>
 
 ## API
 

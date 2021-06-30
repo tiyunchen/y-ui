@@ -3,9 +3,15 @@ import combineClass from 'classnames'
 import { ButtonProps } from './interface'
 import PropTypes from 'prop-types'
 
-const Button: React.FC<ButtonProps> = ({type='primary', onClick, className}) => {
+const Button: React.FC<ButtonProps> = ({
+                                           type='primary',
+                                           onClick= () => {},
+                                           className,
+                                           children}) => {
     const btnClass = combineClass('yui-btn', `y-ui-btn-${type}`, className)
-    return <div className={btnClass}>按钮</div>
+    return <div className={btnClass}
+                onClick={(event)=>onClick(event)}
+    >{children || '按钮'}</div>
 }
 
 
