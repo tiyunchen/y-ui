@@ -71,5 +71,9 @@
   "dependencies": {
     "@babel/runtime": "^7.14.6",
     "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   }
 }
