@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const less = require('gulp-less')
+const sass = require('gulp-sass')(require('sass'))
 const autoprefixer = require('gulp-autoprefixer')
 const cssnano = require('gulp-cssnano')
 const through2 = require('through2')
@@ -11,6 +12,7 @@ const paths = {
         esm: 'esm', // ES module 文件存放的目录名 - 暂时不关心
         dist: 'dist', // umd文件存放的目录名 - 暂时不关心
     },
+    sassStyles: 'components/**/*.scss',
     styles: 'components/**/*.less', // 样式文件路径 - 暂时不关心
     scripts: ['components/**/*.{ts,tsx}', '!components/**/demo/*.{ts,tsx}'], // 脚本文件路径
 };
@@ -24,7 +26,8 @@ function cssInjection(content) {
     return content
         .replace(/\/style\/?'/g, "/style/css'")
         .replace(/\/style\/?"/g, '/style/css"')
-        .replace(/\.less/g, '.css');
+        .replace(/\.less/g, '.css')
+        .replace(/\.scss/g, '.css')
 }
 
 
@@ -83,10 +86,30 @@ function copyLess() {
         .pipe(gulp.dest(paths.dest.esm));
 }
 
+/**
+ * 拷贝scss文件
+ */
+function copySass() {
+    return gulp
+        .src(paths.sassStyles)
+        .pipe(gulp.dest(paths.dest.lib))
+        .pipe(gulp.dest(paths.dest.esm));
+}
+
 function less2css() {
     return gulp
         .src(paths.styles)
         .pipe(less()) // 处理less文件
+        .pipe(autoprefixer()) // 根据browserslistrc增加前缀
+        .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
+        .pipe(gulp.dest(paths.dest.lib))
+        .pipe(gulp.dest(paths.dest.esm));
+}
+
+function sass2css(){
+    return gulp
+        .src(paths.sassStyles)
+        .pipe(sass())
         .pipe(autoprefixer()) // 根据browserslistrc增加前缀
         .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
         .pipe(gulp.dest(paths.dest.lib))
@@ -98,7 +121,7 @@ function less2css() {
 const buildScripts = gulp.series(compileCJS, compileESM);
 
 // 整体并行执行任务
-const build = gulp.parallel(buildScripts, copyLess, less2css);
+const build = gulp.parallel(buildScripts, copyLess, less2css, copySass, sass2css);
 
 exports.build = build;
 
