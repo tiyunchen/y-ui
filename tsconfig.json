@@ -17,6 +17,6 @@
       "esModuleInterop": true,
       "resolveJsonModule": true
     },
-    "include": ["components", "global.d.ts"],
+    "include": ["components", "global.d.ts", "./.eslintrc.js"],
     "exclude": ["node_modules"]
   }

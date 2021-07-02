@@ -7,3 +7,5 @@
 /dist
 /doc-site
 /types
+yarn-debug.log*
+yarn-error.log*
