@@ -54,7 +54,6 @@ export default function(plop: NodePlopAPI) {
             {
                 type: 'append',
                 path: path.resolve(__dirname, '../components/index.ts'),
-                pattern: '/* PLOP_INJECT_EXPORT */',
                 template: "export { default as {{pascalCase name}} } from './{{kebabCase name}}';",
             },
         ],

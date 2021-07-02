@@ -7,7 +7,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "docz dev",
+    "dev": "rimraf .docz && docz dev",
     "clean": "rimraf lib esm dist",
     "start": "npm run dev",
     "build:doc": "rimraf doc-site && docz build",
