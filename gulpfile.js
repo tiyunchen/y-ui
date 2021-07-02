@@ -19,7 +19,7 @@ const paths = {
 /**
  * 当前组件样式 import './index.less' => import './index.css'
  * 依赖的其他组件样式 import '../test-comp/style' => import '../test-comp/style/css.js'
- * 依赖的其他组件样式 import '../test-comp/style/index.js' => import '../test-comp/style/css.js'
+ * 依赖的其他组件样式 import '../test-comp/style/index.ts' => import '../test-comp/style/css.js'
  * @param {string} content
  */
 function cssInjection(content) {

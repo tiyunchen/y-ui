@@ -1,27 +1,20 @@
-import React from "react";
+import React, {MouseEvent} from "react";
+
 import combineClass from 'classnames'
+
 import { ButtonProps } from './interface'
-import PropTypes from 'prop-types'
 
 const Button: React.FC<ButtonProps> = ({
                                            type='primary',
                                            onClick= () => {},
-                                           className,
-                                           children}) => {
+                                           className= '',
+                                           children
+}) => {
     const btnClass = combineClass('yui-btn', `y-ui-btn-${type}`, className)
     return <div className={btnClass}
-                onClick={(event)=>onClick(event)}
+                onClick={(event: MouseEvent)=>onClick(event)}
     >{children || '按钮'}</div>
 }
 
-
-Button.propTypes = {
-    /**
-     * 按钮类型
-     */
-    type: PropTypes.oneOf(['primary', 'success', 'error']),
-    onClick: PropTypes.func,
-    className: PropTypes.string
-}
 
 export default Button
