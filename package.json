@@ -1,5 +1,5 @@
 {
-  "name": "y-ui",
+  "name": "@chentiyun/y-ui",
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
@@ -21,6 +21,11 @@
     "esm/**/style/*",
     "lib/**/style/*",
     "*.less"
+  ],
+  "files": [
+    "lib",
+    "dist",
+    "esm"
   ],
   "keywords": [],
   "author": "",
