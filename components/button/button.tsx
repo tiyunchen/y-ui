@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <div
       className={btnClass}
-      onClick={(event: MouseEvent) => onClick(event)}
+      onClick={(event:MouseEvent) => onClick(event)}
     >
       {children || '按钮'}
     </div>

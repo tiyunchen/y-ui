@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'y-ui/lib/button';
-import 'y-ui/lib/button/style';
+import Button from '../button';
+import '../style/index.less';
 
 export default () => <Button type="primary" onClick={()=>alert(111)}>这是按钮</Button>;
