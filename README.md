@@ -16,3 +16,16 @@ react 的UI框架，使用ts创建
 `yarn run new`
 
 创建新的组件
+
+项目内按需引入:
+
+`npm install babel-plugin-import -D`
+
+.babelrc  plugins 添加
+
+```
+["import", {
+        "libraryName": "你导入的UI库name",
+        "style": "css"
+ }]
+ ```

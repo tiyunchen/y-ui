@@ -8,9 +8,9 @@ const through2 = require('through2')
 
 const paths = {
     dest: {
-        lib: 'lib', // commonjs 文件存放的目录名 - 本块关注
-        esm: 'esm', // ES module 文件存放的目录名 - 暂时不关心
-        dist: 'dist', // umd文件存放的目录名 - 暂时不关心
+        lib: 'lib', // commonjs 文件存放的目录名
+        esm: 'esm', // ES module 文件存放的目录名
+        dist: 'dist', // umd文件存放的目录名
     },
     sassStyles: 'components/**/*.scss',
     styles: 'components/**/*.less', // 样式文件路径 - 暂时不关心
@@ -106,7 +106,7 @@ function less2css() {
         .pipe(gulp.dest(paths.dest.esm));
 }
 
-function sass2css(){
+function sass2css() {
     return gulp
         .src(paths.sassStyles)
         .pipe(sass())

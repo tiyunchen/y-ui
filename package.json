@@ -1,6 +1,6 @@
 {
   "name": "@chentiyun/y-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -20,7 +20,8 @@
     "dist/*",
     "esm/**/style/*",
     "lib/**/style/*",
-    "*.less"
+    "*.less",
+    "*.scss"
   ],
   "files": [
     "lib",
