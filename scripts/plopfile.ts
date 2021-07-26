@@ -1,5 +1,6 @@
 /* eslint-disable  import/no-extraneous-dependencies */
 import { NodePlopAPI } from 'plop';
+
 const path = require('path')
 
 export default function(plop: NodePlopAPI) {
@@ -46,15 +47,15 @@ export default function(plop: NodePlopAPI) {
                 path: path.resolve(__dirname, '../components/{{kebabCase name}}/demo/basic.tsx'),
                 templateFile: path.resolve(__dirname, '../templates/component/demo/basic.hbs'),
             },
-            {
-                type: 'add',
-                path: path.resolve(__dirname, '../components/{{kebabCase name}}/__tests__/index.test.tsx'),
-                templateFile: path.resolve(__dirname, '../templates/component/__tests__/index.test.hbs'),
-            },
+            // {
+            //     type: 'add',
+            //     path: path.resolve(__dirname, '../components/{{kebabCase name}}/__tests__/index.test.tsx'),
+            //     templateFile: path.resolve(__dirname, '../templates/component/__tests__/index.test.hbs'),
+            // },
             {
                 type: 'append',
                 path: path.resolve(__dirname, '../components/index.ts'),
-                template: "export { default as {{pascalCase name}} } from './{{kebabCase name}}';",
+                template: "export { default as {{pascalCase name}} } from './{{kebabCase name}}';\nexport type { {{pascalCase name}}Props } from './{{kebabCase name}}/interface'",
             },
         ],
     });
