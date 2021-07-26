@@ -2,7 +2,7 @@ import React from 'react'
 
 import './props.css'
 
-export const getDefaultValue = ({defaultValue, type, flowType}) => {
+export const getDefaultValue = ({ defaultValue, type, flowType }) => {
   const propType = flowType || type
   if (!defaultValue || !defaultValue.value) return null
   if (defaultValue.value === "''") {
@@ -19,7 +19,7 @@ export const getDefaultValue = ({defaultValue, type, flowType}) => {
 }
 
 
-export const Props = ({props, getPropType}) => {
+export const Props = ({ props, getPropType }) => {
   const entries = Object.entries(props)
   const bodyData = entries.map(([key, prop]) => {
     const type = getPropType(prop)
@@ -35,7 +35,7 @@ export const Props = ({props, getPropType}) => {
   })
   return (
     <div>
-      <table className={'prop-table'}>
+      <table className="prop-table">
         <thead>
         <tr>
           <th>属性</th>
@@ -45,8 +45,7 @@ export const Props = ({props, getPropType}) => {
         </tr>
         </thead>
         <tbody>
-        {bodyData.map(tr => {
-          return <tr key={tr.name}>
+        {bodyData.map(tr => <tr key={tr.name}>
             <td>{tr.name}</td>
             <td>{tr.description}</td>
             <td>
@@ -57,8 +56,7 @@ export const Props = ({props, getPropType}) => {
             <td>
               <pre>{tr.defaultValue || '-'}</pre>
             </td>
-          </tr>
-        })}
+          </tr>)}
         </tbody>
       </table>
 

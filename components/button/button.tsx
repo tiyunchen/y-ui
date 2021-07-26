@@ -5,14 +5,16 @@ import { ButtonProps } from './interface';
 const Button: React.FC<ButtonProps> = ({
   type = 'primary',
   onClick = () => {},
-  className = '',
+  className,
   children,
+  loading = false,
 }) => {
   const btnClass = combineClass('yui-btn', `y-ui-btn-${type}`, className);
   return (
     <div
       className={btnClass}
       onClick={(event:MouseEvent) => onClick(event)}
+      data-loading={loading ? 'yes' : 'no'}
     >
       {children || '按钮'}
     </div>
