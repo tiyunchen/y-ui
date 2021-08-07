@@ -11,14 +11,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: install
-        run: |
-          echo 装包
-          npm install
-          echo 构建文档
-          npm run docs:build
-          echo 构建完成
-          ls
+      - run: npm run docs:build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
