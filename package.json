@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "dumi dev",
-    "docs:build": "npm run changelog && cross-env yt_mode=production dumi build",
+    "docs:build": "npm run changelog &&  dumi build",
     "release": "npm run changelog && npm run docs:build && npm run build",
     "build:types": "npm run clean && tsc -p tsconfig.build.json && cpr lib esm",
     "build": "npm run build:types && gulp",
@@ -36,6 +36,7 @@
     "@umijs/plugin-sass": "^1.1.1",
     "@umijs/test": "^3.0.5",
     "conventional-changelog": "^3.1.24",
+    "conventional-changelog-cli": "^2.1.1",
     "cpr": "^3.0.1",
     "cross-env": "^7.0.3",
     "dumi": "^1.0.16",
