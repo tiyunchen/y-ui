@@ -1,4 +1,3 @@
-/* eslint-disable  import/no-extraneous-dependencies */
 import { NodePlopAPI } from 'plop';
 
 const path = require('path')
@@ -14,7 +13,7 @@ export default function(plop: NodePlopAPI) {
         actions: [
             {
                 type: 'add',
-                path: path.resolve(__dirname, '../components/{{kebabCase name}}/index.ts'),
+                path: path.resolve(__dirname, '../components/{{kebabCase name}}/index.tsx'),
                 templateFile: path.resolve(__dirname, '../templates/component/index.hbs'),
             },
             {
@@ -29,12 +28,12 @@ export default function(plop: NodePlopAPI) {
             },
             {
                 type: 'add',
-                path: path.resolve(__dirname, '../components/{{kebabCase name}}/style/index.ts'),
+                path: path.resolve(__dirname, '../components/{{kebabCase name}}/style/index.tsx'),
                 templateFile: path.resolve(__dirname, '../templates/component/style/index.hbs'),
             },
             {
                 type: 'add',
-                path: path.resolve(__dirname, '../components/{{kebabCase name}}/index.mdx'),
+                path: path.resolve(__dirname, '../components/{{kebabCase name}}/index.md'),
                 templateFile: path.resolve(__dirname, '../templates/component/doc.hbs'),
             },
             {
@@ -54,7 +53,7 @@ export default function(plop: NodePlopAPI) {
             // },
             {
                 type: 'append',
-                path: path.resolve(__dirname, '../components/index.ts'),
+                path: path.resolve(__dirname, '../components/index.tsx'),
                 template: "export { default as {{pascalCase name}} } from './{{kebabCase name}}';\nexport type { {{pascalCase name}}Props } from './{{kebabCase name}}/interface'",
             },
         ],

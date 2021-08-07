@@ -12,14 +12,13 @@ const paths = {
         esm: 'esm', // ES module 文件存放的目录名
         dist: 'dist', // umd文件存放的目录名
     },
-    sassStyles: 'components/**/*.scss',
     styles: 'components/**/*.less', // 样式文件路径 - 暂时不关心
     scripts: ['components/**/*.{ts,tsx}', '!components/**/demo/*.{ts,tsx}'], // 脚本文件路径
 };
 /**
  * 当前组件样式 import './index.less' => import './index.less'
  * 依赖的其他组件样式 import '../test-comp/style' => import '../test-comp/style/css.js'
- * 依赖的其他组件样式 import '../test-comp/style/index.ts' => import '../test-comp/style/css.js'
+ * 依赖的其他组件样式 import '../test-comp/style/index.tsx' => import '../test-comp/style/css.js'
  * @param {string} content
  */
 function cssInjection(content) {
@@ -27,7 +26,6 @@ function cssInjection(content) {
         .replace(/\/style\/?'/g, "/style/css'")
         .replace(/\/style\/?"/g, '/style/css"')
         .replace(/\.less/g, '.css')
-        .replace(/\.scss/g, '.css')
 }
 
 
@@ -86,15 +84,6 @@ function copyLess() {
         .pipe(gulp.dest(paths.dest.esm));
 }
 
-/**
- * 拷贝scss文件
- */
-function copySass() {
-    return gulp
-        .src(paths.sassStyles)
-        .pipe(gulp.dest(paths.dest.lib))
-        .pipe(gulp.dest(paths.dest.esm));
-}
 
 function less2css() {
     return gulp
@@ -106,22 +95,13 @@ function less2css() {
         .pipe(gulp.dest(paths.dest.esm));
 }
 
-function sass2css() {
-    return gulp
-        .src(paths.sassStyles)
-        .pipe(sass())
-        .pipe(autoprefixer()) // 根据browserslistrc增加前缀
-        .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
-        .pipe(gulp.dest(paths.dest.lib))
-        .pipe(gulp.dest(paths.dest.esm));
-}
 
 
 // 串行执行编译脚本任务（cjs,esm） 避免环境变量影响
 const buildScripts = gulp.series(compileCJS, compileESM);
 
 // 整体并行执行任务
-const build = gulp.parallel(buildScripts, copyLess, less2css, copySass, sass2css);
+const build = gulp.parallel(buildScripts, copyLess, less2css);
 
 exports.build = build;
 

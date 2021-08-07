@@ -16,9 +16,9 @@ export interface ButtonProps {
      */
     className?: string,
 
-  /**
-   * 是否在加载中
-   * @default false
-   */
-  loading?: boolean
+    /**
+     * 是否在加载中
+     * @default false
+     */
+    loading?: boolean
 }
