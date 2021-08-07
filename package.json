@@ -5,7 +5,6 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "npm run changelog &&  dumi build",
-    "docs:deploy": "cpr docs-dist docs -o",
     "release": "npm run changelog && npm run docs:build && npm run build",
     "build:types": "npm run clean && tsc -p tsconfig.build.json && cpr lib esm",
     "build": "npm run build:types && gulp",
@@ -41,7 +40,7 @@
     "cross-env": "^7.0.3",
     "dumi": "^1.0.16",
     "father-build": "^1.17.2",
-    "gh-pages": "^3.0.0",
+    "gh-pages": "^3.2.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-babel": "^8.0.0",
