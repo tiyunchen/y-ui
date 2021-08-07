@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
-    
+
     steps:
     - uses: actions/checkout@v2
 
@@ -30,4 +30,4 @@ jobs:
         npm run docs:build
         echo 构建完成
         ls
-        cpr docs-dist docs
+        npm run docs:deploy

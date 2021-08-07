@@ -5,6 +5,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "npm run changelog &&  dumi build",
+    "docs:deploy": "cpr docs-dist docs -o",
     "release": "npm run changelog && npm run docs:build && npm run build",
     "build:types": "npm run clean && tsc -p tsconfig.build.json && cpr lib esm",
     "build": "npm run build:types && gulp",
