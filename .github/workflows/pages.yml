@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x]
     
     steps:
     - uses: actions/checkout@v2
@@ -24,5 +24,9 @@ jobs:
 
     - name: Build
       run: |
+        echo 装包
         npm install
+        echo 构建文档
         npm run docs:build
+        echo 构建完成
+        ls
