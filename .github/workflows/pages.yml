@@ -15,12 +15,6 @@ jobs:
         node-version: [14.x]
     
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
 
     - name: Build
       run: |
@@ -29,4 +23,5 @@ jobs:
         echo 构建文档
         npm run docs:build
         echo 构建完成
+        cpr docs-dist docs -o
         ls
