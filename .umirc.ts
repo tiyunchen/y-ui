@@ -1,5 +1,7 @@
 import { defineConfig } from 'dumi';
-
+// 此处更换为自己的仓库名
+let base = '/y-ui';
+let publicPath = '/y-ui/';
 export default defineConfig({
   title: 'y-ui',
   outputPath: 'docs-dist',
@@ -23,4 +25,6 @@ export default defineConfig({
   styles: [
 
   ],
+  base,
+  publicPath
 });
