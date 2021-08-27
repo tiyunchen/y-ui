@@ -6,13 +6,14 @@ const cssnano = require('gulp-cssnano')
 const through2 = require('through2')
 
 const paths = {
-    dest: {
-        lib: 'lib', // commonjs 文件存放的目录名
-        esm: 'esm', // ES module 文件存放的目录名
-        dist: 'dist', // umd文件存放的目录名
-    },
-    styles: 'components/**/*.less', // 样式文件路径 - 暂时不关心
-    scripts: ['components/**/*.{ts,tsx}', '!components/**/demo/*.{ts,tsx}'], // 脚本文件路径
+  dest: {
+    lib: 'lib', // commonjs 文件存放的目录名
+    esm: 'esm', // ES module 文件存放的目录名
+    dist: 'dist', // umd文件存放的目录名
+  },
+  styles: ['src/**/*.less', '!src/**/demo/*.less'],
+  scripts: ['src/**/*.{ts,tsx,js,jsx}', '!src/**/demo/**', '!src/.umi', '!src/.umi-production'], // 脚本文件路径
+  otherFile: ['src/**/**.*', '!src/**/*.{ts,tsx,js,jsx}'], // 非
 };
 /**
  * 当前组件样式 import './index.less' => import './index.less'
@@ -44,10 +45,10 @@ function compileScripts(babelEnv, destDir) {
                 this.push(file.clone());
                 // 找到目标
                 if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
-                    const content = file.contents.toString(encoding);
-                    file.contents = Buffer.from(cssInjection(content)); // 文件内容处理
-                    file.path = file.path.replace(/index\.js/, 'css.js'); // 文件重命名
-                    this.push(file); // 新增该文件
+                    // const content = file.contents.toString(encoding);
+                    // file.contents = Buffer.from(cssInjection(content)); // 文件内容处理
+                    // file.path = file.path.replace(/index\.js/, 'css.js'); // 文件重命名
+                    // this.push(file); // 新增该文件
                     next();
                 } else {
                     next();
@@ -77,10 +78,7 @@ function compileESM() {
  * 拷贝less文件
  */
 function copyLess() {
-    return gulp
-        .src(paths.styles)
-        .pipe(gulp.dest(paths.dest.lib))
-        .pipe(gulp.dest(paths.dest.esm));
+    return gulp.src(paths.styles).pipe(gulp.dest(paths.dest.lib))
 }
 
 
@@ -91,16 +89,18 @@ function less2css() {
         .pipe(autoprefixer()) // 根据browserslistrc增加前缀
         .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
         .pipe(gulp.dest(paths.dest.lib))
-        .pipe(gulp.dest(paths.dest.esm));
+}
+function copyOtherFile() {
+  return gulp.src(paths.otherFile).pipe(gulp.dest(paths.dest.lib));
 }
 
 
 
 // 串行执行编译脚本任务（cjs,esm） 避免环境变量影响
-const buildScripts = gulp.series(compileCJS, compileESM);
+const buildScripts = gulp.series(compileCJS);
 
 // 整体并行执行任务
-const build = gulp.parallel(buildScripts, copyLess, less2css);
+const build = gulp.parallel(buildScripts, copyLess, less2css, copyOtherFile);
 
 exports.build = build;
 

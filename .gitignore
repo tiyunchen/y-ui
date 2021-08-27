@@ -9,3 +9,4 @@
 /types
 yarn-debug.log*
 yarn-error.log*
+/docs-dist/

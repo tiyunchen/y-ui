@@ -2,7 +2,7 @@ import React, { MouseEvent } from 'react';
 import {LoadingOutlined} from '@ant-design/icons'
 import combineClass from 'classnames';
 import { ButtonProps } from './interface';
-import './style/index'
+import './style/index.less'
 
 const Button: React.FC<ButtonProps> = (props) => {
   const {type, onClick, className, children, loading} = props

@@ -4,11 +4,12 @@
   "description": "",
   "scripts": {
     "start": "dumi dev",
-    "docs:build": "dumi build",
+    "docs:build": "cross-env mode=production dumi build",
+    "docs:build-local": "dumi build",
     "release": "npm run changelog && npm run docs:build && npm run build",
-    "build:types": "npm run clean && tsc -p tsconfig.build.json && cpr lib esm",
+    "build:types": "npm run clean && tsc -p tsconfig.build.json",
     "build": "npm run build:types && gulp",
-    "clean": "rimraf lib esm dist",
+    "clean": "rimraf lib",
     "changelog": "conventional-changelog -p angular -i docs/CHANGELOG.md -s -r 0"
   },
   "main": "lib/index.js",

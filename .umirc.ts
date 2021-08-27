@@ -1,9 +1,19 @@
 import { defineConfig } from 'dumi';
+
 // 此处更换为自己的仓库名
-let base = '/y-ui';
-let publicPath = '/y-ui/';
+interface pathProps  {
+  base?: string,
+  publicPath?: string
+}
+let pathProps:pathProps = {}
+if(process.env.mode === 'production'){
+  pathProps['base'] = '/y-ui'
+  pathProps['publicPath'] = '/y-ui/'
+}
+
+console.log(process.env.mode)
 export default defineConfig({
-  title: 'y-ui',
+  title: '西瓜',
   outputPath: 'docs-dist',
   sass: {
     // 默认值 Dart Sass，如果要改用 Node Sass，可安装 node-sass 依赖，然后使用该配置项
@@ -25,6 +35,7 @@ export default defineConfig({
   styles: [
 
   ],
-  base,
-  publicPath
+  hash: false,
+  devtool: 'source-map',
+  ...pathProps
 });
