@@ -21,4 +21,11 @@ export interface ButtonProps {
      * @default false
      */
     loading?: boolean
+
+
+  /**
+   * @description 是否禁止
+   * @default false
+   */
+  disabled?: boolean
 }

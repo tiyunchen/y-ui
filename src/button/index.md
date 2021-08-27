@@ -4,9 +4,19 @@ Button 按钮
 import React from 'react';
 import { Button } from '@chentiyun/y-ui';
 export default () => {
-  return (<Button onClick={()=>console.log(222)} loading={true}>确定</Button>);
+  return (<div>
+    <div>
+      <Button onClick={()=>console.log(222)}>确定</Button>
+    </div>
+    <div>
+      <Button onClick={()=>console.log(222)} loading={true} disabled={true}>确定</Button>
+    </div>
+    <div>
+      <Button onClick={()=>console.log(222)} type={'error'}>确定</Button>
+    </div>
+  </div>);
 };
 ```
 
-[comment]: <> (<API></API>)
+<API></API>
 
