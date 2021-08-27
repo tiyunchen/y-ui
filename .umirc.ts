@@ -36,6 +36,5 @@ export default defineConfig({
 
   ],
   hash: false,
-  devtool: 'source-map',
   ...pathProps
 });
