@@ -35,6 +35,13 @@ export default defineConfig({
   styles: [
 
   ],
+  themeConfig: {
+    hd: {
+      rules: [
+        // {mode: 'vw', options: [100, 750]}
+      ],
+    },
+  },
   hash: false,
   ...pathProps
 });
