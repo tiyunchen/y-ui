@@ -1,7 +1,8 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo, useState, useRef} from 'react';
 import type {CSSProperties} from 'react'
 import {useSpring, animated} from '@react-spring/web'
 import {renderToContainer, GetContainer} from '../utils/index'
+import {useLockScroll} from '../utils/use-lock-scroll'
 import './style/index.less'
 
 export interface MaskProps<S extends string = never> {
@@ -31,13 +32,20 @@ const opacityRecord = {
 
 const Mask: React.FC<MaskProps> = (props) => {
   const [active, setActive] = useState(props.visible)
+
+
+  const ref = useRef<HTMLDivElement>(null)
+
+  // 锁定屏幕禁止滚动
+  useLockScroll(ref, props.visible)
+
   const background = useMemo(()=>{
-    // @ts-ignore
-    const opacity = opacityRecord[props.opacity] ?? props.opacity
+    const opacity = typeof props.opacity === 'number' ? props.opacity : opacityRecord[props.opacity]
     const rgb = props.color === 'white' ? '255, 255, 255' : '0, 0, 0'
     return `rgba(${rgb}, ${opacity})`
   }, [props.color, props.opacity])
 
+  // 动画样式处理
   const {opacity} = useSpring({
     opacity: props.visible ? 1 : 0,
     config: {
@@ -52,7 +60,6 @@ const Mask: React.FC<MaskProps> = (props) => {
     },
     onRest: ()=>{
       setActive(props.visible)
-      console.log('1111111', props.visible)
     }
   })
   return (
@@ -68,6 +75,7 @@ const Mask: React.FC<MaskProps> = (props) => {
        setActive(false)
        props.onMaskClick &&  props.onMaskClick(event)
      }}
+     ref={ref}
    >
      {
        props.onMaskClick && (

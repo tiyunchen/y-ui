@@ -13,7 +13,7 @@ if(process.env.mode === 'production'){
 
 console.log(process.env.mode)
 export default defineConfig({
-  title: 'y-ui',
+  title: 'watermelon',
   outputPath: 'docs-dist',
   sass: {
     // 默认值 Dart Sass，如果要改用 Node Sass，可安装 node-sass 依赖，然后使用该配置项

@@ -6,7 +6,7 @@ import {Mask} from '@chentiyun/y-ui';
 
 const Index = () =>{
     const [visible, setVisible] = useState(false)
-    return <div>
+    return <div style={{ height: '10000px'}}>
       <button onClick={()=>setVisible(true)}>显示</button>
       <Mask
         visible={visible}
