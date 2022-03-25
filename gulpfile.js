@@ -102,6 +102,22 @@ const buildScripts = gulp.series(compileCJS);
 // 整体并行执行任务
 const build = gulp.parallel(buildScripts, copyLess, less2css, copyOtherFile);
 
-exports.build = build;
+function watch(){
+  function firstCb(){
+    console.log('watch...')
+  }
+  build(firstCb)
+  gulp.watch(['src'], function (cb){
+    let start = new Date().getTime()
+    console.log('文件改变')
+    function finishCb(){
+      let end = new Date().getTime()
+      console.log('watching...', `耗时: ${end - start}ms`)
+      cb()
+    }
+    build(finishCb)
+  })
+}
 
 exports.default = build;
+exports.watchTask = watch;
