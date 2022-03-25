@@ -8,3 +8,5 @@ export { default as Input } from './input/index';
 export { default as ImageViewer} from './imageViewer'
 
 export { default as Mask } from './mask'
+
+export { default as Badge } from './badge'

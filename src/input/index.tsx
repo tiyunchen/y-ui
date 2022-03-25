@@ -1,7 +1,7 @@
 import React from "react";
 import InputContent from './Input'
 
-console.log('InputContent', InputContent)
+// console.log('InputContent', InputContent)
 const a = <div>asd</div>
 export default a
 import Group from './Group'
