@@ -1,6 +1,6 @@
 {
   "name": "@chentiyun/y-ui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "scripts": {
     "start": "dumi dev",
@@ -11,7 +11,7 @@
     "build": "npm run build:types && gulp",
     "clean": "rimraf lib",
     "changelog": "conventional-changelog -p angular -i docs/CHANGELOG.md -s -r 0",
-    "dev": "tsc -p tsconfig.build.json && gulp watchTask"
+    "dev": "gulp watchTask"
   },
   "main": "lib/index.js",
   "module": "esm/index.js",
