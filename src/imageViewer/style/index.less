@@ -1,0 +1,35 @@
+
+@class-prefix: ~'yui-image-viewer';
+
+.@{class-prefix} {
+  color: white;
+  &-slides {
+    position: relative;
+    touch-action: none;
+    z-index: 111;
+    &-content {
+      //white-space: nowrap;
+      display: flex;
+      width: fit-content;
+      flex-wrap: nowrap;
+      &-item {
+        width: 100vw;
+        display: inline-block;
+        height: 100vh;
+        &-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+
+      }
+    }
+
+  }
+}

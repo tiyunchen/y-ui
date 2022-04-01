@@ -15,7 +15,7 @@ export interface MaskProps<S extends string = never> {
 
   color?: string,
 
-  opacity: 'default' | 'thin' | 'thick' | number
+  opacity?: 'default' | 'thin' | 'thick' | number
 
   getContainer?: GetContainer,
   style?: CSSProperties & Partial<Record<S, string>>
@@ -40,7 +40,8 @@ const Mask: React.FC<MaskProps> = (props) => {
   useLockScroll(ref, props.visible)
 
   const background = useMemo(()=>{
-    const opacity = typeof props.opacity === 'number' ? props.opacity : opacityRecord[props.opacity]
+    let opacity = props.opacity || 'default'
+    opacity = typeof opacity === 'number' ? opacity : opacityRecord[opacity]
     const rgb = props.color === 'white' ? '255, 255, 255' : '0, 0, 0'
     return `rgba(${rgb}, ${opacity})`
   }, [props.color, props.opacity])
@@ -94,7 +95,7 @@ const Mask: React.FC<MaskProps> = (props) => {
 };
 
 Mask.defaultProps = {
-  getContainer: null,
+  getContainer: ()=>document.body,
   color: 'black',
   opacity: 'default',
 }

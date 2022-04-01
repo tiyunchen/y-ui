@@ -6,6 +6,7 @@ export { default as Input } from './input/index';
 
 
 export { default as ImageViewer} from './imageViewer'
+export type { ImageViewerProps } from './imageViewer'
 
 export { default as Mask } from './mask'
 export type {MaskProps} from './mask'
