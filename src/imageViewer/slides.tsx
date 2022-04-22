@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
 import {useDrag, usePinch} from '@use-gesture/react'
 import {animated, useSpring} from '@react-spring/web'
+import Slide from './slide'
 
 export interface SlidesProps {
   images: string[],
@@ -16,7 +17,6 @@ const Slides: React.FC<SlidesProps> = (props) => {
   const clientWidth = window.innerWidth
   const [{x, y}, api] = useSpring(()=>({x: props.defaultIndex * clientWidth, y: 0}))
   const slideRef = useRef<HTMLDivElement>(null)
-  const slideItemRef = useRef<HTMLDivElement>(null)
   const slideIndex = useRef(0)
 
   const bind = useDrag((state)=>{
@@ -35,16 +35,12 @@ const Slides: React.FC<SlidesProps> = (props) => {
       // 到达左右边界的阻尼效果
       if(Math.abs(x) < triggerDistance){
         api.start({x: -(clientWidth * slideIndex.current)+x})
-        console.log('stat11e', state, x)
       }
     }
   }, {
     axis: 'x',
   })
 
-  const pinch = usePinch((state)=>{
-    console.log('缩放', state)
-  })
 
 
 
@@ -52,13 +48,7 @@ const Slides: React.FC<SlidesProps> = (props) => {
     <animated.div className={CLASS_PREFIX} style={{x, y}} {...bind()} ref={slideRef}>
       <div className={`${CLASS_PREFIX}-content`}>
         {
-          props.images.map((img, key)=>(
-            <div className={`${CLASS_PREFIX}-content-item`} key={key} ref={slideItemRef}>
-              <div className={`${CLASS_PREFIX}-content-item-wrap`}>
-                <img src={img} alt=""/>
-              </div>
-            </div>
-          ))
+          props.images.map((img, key)=>(<Slide imgSrc={img} key={key} />))
         }
       </div>
     </animated.div>
