@@ -39,6 +39,7 @@ const Slides: React.FC<SlidesProps> = (props) => {
     }
   }, {
     axis: 'x',
+    eventOptions: { passive: false, touch: true },
   })
 
 

@@ -5,6 +5,7 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
+    "typeRoots": ["./node_modules/@types"],
     "target": "esnext",
     "module": "commonjs",
     "jsx": "react",

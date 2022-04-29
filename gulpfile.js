@@ -28,6 +28,10 @@ function cssInjection(content) {
         .replace(/\.less/g, '.css')
 }
 
+function lessImportToCss(content){
+  return content.replace('.less', '.css')
+}
+
 
 /**
  * 编译脚本文件
@@ -44,11 +48,10 @@ function compileScripts(babelEnv, destDir) {
             through2.obj(function z(file, encoding, next) {
                 this.push(file.clone());
                 // 找到目标
-                if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
-                    // const content = file.contents.toString(encoding);
-                    // file.contents = Buffer.from(cssInjection(content)); // 文件内容处理
-                    // file.path = file.path.replace(/index\.js/, 'css.js'); // 文件重命名
-                    // this.push(file); // 新增该文件
+                if (file.path.endsWith('.js')) {
+                    const content = file.contents.toString(encoding)
+                    file.contents = Buffer.from(lessImportToCss(content)); // 文件内容处理
+                    this.push(file); // 新增该文件
                     next();
                 } else {
                     next();

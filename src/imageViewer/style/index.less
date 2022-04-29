@@ -16,6 +16,9 @@
         width: 100vw;
         display: inline-block;
         height: 100vh;
+        touch-action: none;
+        position: relative;
+        z-index: 1;
         &-wrap {
           display: flex;
           align-items: center;
@@ -26,6 +29,9 @@
             max-width: 100%;
             max-height: 100%;
             zoom: var(--zoom, 1);
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
           }
         }
 
