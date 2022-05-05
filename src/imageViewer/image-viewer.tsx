@@ -7,7 +7,7 @@ import './style/index.less'
 export interface ImageViewerProps {
   visible: boolean,
   imgList: string[],
-  onClick?: ()=>void,
+  onClick: ()=>void,
   className?: string
 }
 
@@ -19,11 +19,14 @@ export const ImageViewer: React.FC<ImageViewerProps> = (props) => {
   const className = cls(CLASS_PREFIX, props.className)
   return (<Mask
     visible={props.visible}
-    onMaskClick={props.onClick}
     opacity={0.9}
   >
     <div className={`${CLASS_PREFIX}`}>
-      {props.visible && <Slides images={props.imgList} defaultIndex={0} />}
+      {props.visible && <Slides
+        images={props.imgList}
+        defaultIndex={0}
+        onClick={()=>props.onClick()}
+      />}
     </div>
   </Mask>)
 };

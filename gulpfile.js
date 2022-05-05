@@ -4,10 +4,11 @@ const less = require('gulp-less')
 const autoprefixer = require('gulp-autoprefixer')
 const cssnano = require('gulp-cssnano')
 const through2 = require('through2')
+const tsConfig = require('./tsconfig.json')
 
 const paths = {
   dest: {
-    lib: 'lib', // commonjs 文件存放的目录名
+    lib: tsConfig.compilerOptions.declarationDir, // commonjs 文件存放的目录名
     esm: 'esm', // ES module 文件存放的目录名
     dist: 'dist', // umd文件存放的目录名
   },
@@ -50,6 +51,7 @@ function compileScripts(babelEnv, destDir) {
                 // 找到目标
                 if (file.path.endsWith('.js')) {
                     const content = file.contents.toString(encoding)
+                    // 将less的导入转成css的导入
                     file.contents = Buffer.from(lessImportToCss(content)); // 文件内容处理
                     this.push(file); // 新增该文件
                     next();

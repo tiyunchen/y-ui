@@ -10,7 +10,7 @@
     "module": "commonjs",
     "jsx": "react",
     "declaration": true,
-    "declarationDir": "lib", // 类型定义目录生成的地方
+    "declarationDir": "lib",
     "emitDeclarationOnly": true,
     "strict": true,
     "moduleResolution": "node",

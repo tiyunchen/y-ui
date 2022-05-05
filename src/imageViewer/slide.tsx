@@ -49,6 +49,7 @@ const Slide: React.FC<SlideProps> = ({imgSrc}) => {
             src={imgSrc}
             alt=""
             style={imgStyle}
+            draggable={false}
           />
         </div>
       </div>

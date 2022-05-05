@@ -6,6 +6,7 @@ import Slide from './slide'
 export interface SlidesProps {
   images: string[],
   onChange?: (index: number) =>void,
+  onClick: ()=>void;
   defaultIndex: number
 }
 
@@ -16,10 +17,17 @@ const CLASS_PREFIX = 'yui-image-viewer-slides'
 const Slides: React.FC<SlidesProps> = (props) => {
   const clientWidth = window.innerWidth
   const [{x, y}, api] = useSpring(()=>({x: props.defaultIndex * clientWidth, y: 0}))
+
   const slideRef = useRef<HTMLDivElement>(null)
   const slideIndex = useRef(0)
 
   const bind = useDrag((state)=>{
+
+    if(state.tap && state.elapsedTime > 0 && state.elapsedTime < 1000){
+      console.log('state', state)
+      props.onClick()
+      return
+    }
     const [x, y] = state.movement
     if(state.last){
       const left = x < -triggerDistance && slideIndex.current < props.images.length - 1
@@ -46,7 +54,10 @@ const Slides: React.FC<SlidesProps> = (props) => {
 
 
   return (
-    <animated.div className={CLASS_PREFIX} style={{x, y}} {...bind()} ref={slideRef}>
+    <animated.div className={CLASS_PREFIX}
+                  style={{x, y}} {...bind()}
+                  ref={slideRef}
+    >
       <div className={`${CLASS_PREFIX}-content`}>
         {
           props.images.map((img, key)=>(<Slide imgSrc={img} key={key} />))
