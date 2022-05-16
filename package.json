@@ -1,6 +1,6 @@
 {
   "name": "@chentiyun/y-ui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "scripts": {
     "start": "dumi dev",
