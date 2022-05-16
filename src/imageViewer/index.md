@@ -11,15 +11,30 @@ export default () => {
     'https://images.unsplash.com/photo-1567945716310-4745a6b7844b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3113&q=80',
     'https://images.unsplash.com/photo-1624993590528-4ee743c9896e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=200&h=1000&q=80',
   ]
+  const {show} = ImageViewer
+  console.log('showImageViewer', show, ImageViewer)
   return (<div>
     <div>
       <ImageViewer 
         imgList={demoImages}
         visible={visible}
-        onClick={()=>setState(false)}
+        onClose={()=>setState(false)}
       />
       <div onClick={()=>setState(true)}>显示</div>
     </div>
+    
+    <div onClick={()=>{
+      const el = show({
+        imgList: demoImages,
+        onClose: ()=>{
+            console.log('sssss')
+        }
+      })
+      setTimeout(()=>{
+          el.close()
+      }, 2000)
+      console.log('elelelel', el)
+    }}>指令式</div>
    
   </div>);
 };

@@ -6,7 +6,7 @@ import {getScrollParent} from './get-scroll-parent'
 let totalLockCount = 0
 const BODY_LOCK_CLASS = 'yui-overflow-hidden'
 
-export function useLockScroll(rootRef: RefObject<HTMLElement>, shouldLock: boolean){
+export function useLockScroll(rootRef: RefObject<HTMLElement>, shouldLock?: boolean){
 
   const touch = useTouch()
 
