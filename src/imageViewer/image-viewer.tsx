@@ -5,9 +5,9 @@ import {Slides} from './slides'
 import './style/index.less'
 
 export interface ImageViewerProps {
-  visible: boolean,
+  visible?: boolean,
   imgList: string[],
-  onClick: ()=>void,
+  onClose: ()=>void,
   className?: string
 }
 
@@ -25,7 +25,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = (props) => {
       {props.visible && <Slides
         images={props.imgList}
         defaultIndex={0}
-        onClick={()=>props.onClick()}
+        onClick={()=>props.onClose()}
       />}
     </div>
   </Mask>)

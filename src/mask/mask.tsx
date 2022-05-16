@@ -1,4 +1,5 @@
 import React, {useMemo, useState, useRef} from 'react';
+import cls from 'classnames'
 import type {CSSProperties} from 'react'
 import {useSpring, animated} from '@react-spring/web'
 import {renderToContainer, GetContainer} from '../utils/index'
@@ -9,7 +10,7 @@ export interface MaskProps<S extends string = never> {
   /**
    * @description 是否显示
    */
-  visible: boolean
+  visible?: boolean
 
   onMaskClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>)=>void,
 
@@ -18,7 +19,9 @@ export interface MaskProps<S extends string = never> {
   opacity?: 'default' | 'thin' | 'thick' | number
 
   getContainer?: GetContainer,
-  style?: CSSProperties & Partial<Record<S, string>>
+  style?: CSSProperties & Partial<Record<S, string>>,
+
+  className?: string
 
 }
 
@@ -65,7 +68,7 @@ const Mask: React.FC<MaskProps> = (props) => {
   })
   return (
    renderToContainer( <animated.div
-     className={classPrefix}
+     className={cls(classPrefix, props.className)}
      style={{
        background: background,
        opacity,
@@ -73,7 +76,6 @@ const Mask: React.FC<MaskProps> = (props) => {
        display: active ? 'unset' : 'none'
      }}
      onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>)=>{
-       setActive(false)
        props.onMaskClick &&  props.onMaskClick(event)
      }}
      ref={ref}

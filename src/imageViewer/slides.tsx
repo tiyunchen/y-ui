@@ -16,17 +16,19 @@ const CLASS_PREFIX = 'yui-image-viewer-slides'
 
 const Slides: React.FC<SlidesProps> = (props) => {
   const clientWidth = window.innerWidth
+  const [dragging, setDrag] = useState(false)
   const [{x, y}, api] = useSpring(()=>({x: props.defaultIndex * clientWidth, y: 0}))
-
+  const slideItemRef = useRef(false)
   const slideRef = useRef<HTMLDivElement>(null)
   const slideIndex = useRef(0)
 
   const bind = useDrag((state)=>{
-
     if(state.tap && state.elapsedTime > 0 && state.elapsedTime < 1000){
-      console.log('state', state)
-      props.onClick()
+      onClose()
       return
+    }
+    if(!slideItemRef.current){
+      return;
     }
     const [x, y] = state.movement
     if(state.last){
@@ -51,16 +53,27 @@ const Slides: React.FC<SlidesProps> = (props) => {
   })
 
 
+  function onClose(){
+    props.onClick()
+  }
 
 
   return (
     <animated.div className={CLASS_PREFIX}
                   style={{x, y}} {...bind()}
                   ref={slideRef}
+                  // onClick={()=>props.onClick()}
     >
       <div className={`${CLASS_PREFIX}-content`}>
         {
-          props.images.map((img, key)=>(<Slide imgSrc={img} key={key} />))
+          props.images.map((img, key)=>(
+            <Slide
+              imgSrc={img}
+              key={key}
+              slideRef={slideItemRef}
+              onClick={()=>onClose()}
+            />
+          ))
         }
       </div>
     </animated.div>
